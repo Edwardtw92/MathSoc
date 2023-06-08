@@ -3,7 +3,7 @@ import time
 from playsound import playsound
 
 
-tapped_ids = []
+tapped_ids = {}
 
 while True:
   id = str(input('Tap WatCard: '))
@@ -13,12 +13,13 @@ while True:
         # Reset the list of tapped IDs
         tapped_ids = {}
 
-  if tapped_ids[id] > 2:
-    playsound('Portal2-BuzzerSound.mp3')
+  if id in tapped_ids:
+    if tapped_ids[id] > 2:
+        playsound('Portal2-BuzzerSound.mp3')
+        tapped_ids[id] += 1
   else:
     playsound('Portal2-Beep.mp3')
+    tapped_ids[id]
   
-  tapped_ids.append(id)
-  tapped_ids[id]
   print(tapped_ids)
   time.sleep(1)
