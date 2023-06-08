@@ -14,12 +14,13 @@ while True:
         tapped_ids = {}
 
   if id in tapped_ids:
-    if tapped_ids[id] > 2:
+    if tapped_ids[id] >= 2:
         playsound('Portal2-BuzzerSound.mp3')
-        tapped_ids[id] += 1
+        print(tapped_ids[id])
+    tapped_ids[id] += 1
   else:
     playsound('Portal2-Beep.mp3')
-    tapped_ids[id]
+    tapped_ids[id] = 1
   
   print(tapped_ids)
   time.sleep(1)
