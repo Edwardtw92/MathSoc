@@ -1,17 +1,33 @@
 import time
+from datetime import date
 from playsound import playsound
-
-
+ 
+ 
+cleared_day = str(date.today())
 tapped_ids = {}
-
-while True:
-    # check if time is 0:00
-    current_time = time.localtime()
-    if current_time.tm_hour == 0 and current_time.tm_min == 0:
+ 
+ 
+def is_valid_id(id):
+    if len(id) != 8:
+        return False
+    for i in id:
+        if "0" > i or i > "9":
+            return False
+    return True
+ 
+ 
+while True:    
+    id = str(input("Tap WatCard: "))
+    
+    today = str(date.today())
+    if today != cleared_day:
         tapped_ids.clear()
+        cleared_day = today
     
-    id = str(input("Tap WatCard: "))        
-    
+    if not is_valid_id(id):
+        playsound("Portal2-BuzzerSound.mp3")
+        continue
+ 
     if id not in tapped_ids:
         tapped_ids[id] = 1
     else:
@@ -23,4 +39,4 @@ while True:
     else:
         playsound("Portal2-Beep.mp3")
     
-    time.sleep(1)
+    time.sleep(0.1)
